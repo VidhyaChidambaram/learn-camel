@@ -1,0 +1,7 @@
+activemq-data/
+target/
+*.iml
+.settings/
+.project
+.classpath
+.iml
