@@ -1,4 +1,4 @@
-package com.redhat.camel;
+package com.vidhya.camel;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
