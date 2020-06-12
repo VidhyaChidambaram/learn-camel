@@ -1,4 +1,4 @@
-package com.vidhya.camel;
+package com.vidhya.camel.chapter1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

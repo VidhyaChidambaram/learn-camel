@@ -1,4 +1,4 @@
-package com.vidhya.camel;
+package com.vidhya.camel.chapter1;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
