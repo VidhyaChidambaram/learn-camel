@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.jms.ConnectionFactory;
 
-public class Eip_ContentBasedRouter {
+public class EipContentBasedRouter {
 
     public static void main(String[] args) throws Exception {
 
@@ -29,20 +29,21 @@ class ContentBasedRouter extends RouteBuilder {
 
     private static final Log LOGGER = LogFactory.getLog(ContentBasedRouter.class);
     private static final String UTF_8 = "utf-8";
+    public static final String CAMEL_FILE_NAME = "CamelFileName";
 
     private static void processFiles(Exchange exchange) {
         LOGGER.info(exchange.getIn().getBody());
     }
     @Override
-    public void configure() throws Exception {
+    public void configure() {
 
         from("file:/Users/vchidamb/Softwares/pet_projects/learn-camel/fileTypes?noop=true")
                 .to("jms:queue:incomingOrders");
 
         from("jms:queue:incomingOrders").choice()
-                .when(header("CamelFileName").endsWith(".xml")).to("jms:queue:xmlOrders")
-                .when(header("CamelFileName").endsWith(".json")).to("jms:queue:jsonOrders")
-                .when(header("CamelFileName").regex("^.*(csv|txt)$")).to("jms:queue:textOrders")
+                .when(header(CAMEL_FILE_NAME).endsWith(".xml")).to("jms:queue:xmlOrders")
+                .when(header(CAMEL_FILE_NAME).endsWith(".json")).to("jms:queue:jsonOrders")
+                .when(header(CAMEL_FILE_NAME).regex("^.*(csv|txt)$")).to("jms:queue:textOrders")
                 .otherwise().to("jms:queue:badOrders").stop()
                 .log("Routed all files")
                 .end();
